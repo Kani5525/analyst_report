@@ -12,7 +12,7 @@ pdf.cell(200, 10, 'Group 63: Perpetual Ltd', ln=True, align='C')
 
 # Company Overview
 pdf.set_font("Arial", size=12)
-with open("C:/Users/Lucy/OneDrive/BAFE YR3/FINM3422/Perpetual Research Report/analyst_report-1/Commentary", "r", encoding="utf-8") as file:
+with open("C:/Users/Lucy/OneDrive/BAFE YR3/FINM3422/Perpetual Research Report/analyst_report-1/Overview", "r", encoding="utf-8") as file:
     text = file.read()
 
 pdf.multi_cell(0, 10, text)
@@ -66,5 +66,15 @@ for i, row in df.iterrows():
     pdf.cell(col_widths[0], 10, str(row["Metric"]), border=1, fill=fill)
     pdf.cell(col_widths[1], 10, str(row["Value"]), border=1, ln=True, fill=fill)
 
+pdf.ln(5)
+# Ratio Analysis 
+pdf.set_font("Arial", size=12)
+with open("C:/Users/Lucy/OneDrive/BAFE YR3/FINM3422/Perpetual Research Report/analyst_report-1/Ratio Analysis", "r", encoding="utf-8") as file:
+    text = file.read()
+
+pdf.multi_cell(0, 10, text)
+
+# Insert space for chart to avoid overlap with commentary
+pdf.ln(10)  #
 # Save the PDF
 pdf.output('Perpetual Equity Research Report.pdf')
