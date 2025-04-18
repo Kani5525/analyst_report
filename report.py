@@ -74,6 +74,25 @@ with open("C:/Users/Lucy/OneDrive/BAFE YR3/FINM3422/Perpetual Research Report/an
 
 pdf.multi_cell(0, 10, text)
 
+# Add a new page for the image
+pdf.add_page()
+
+# Heading for the image
+pdf.set_font('Arial', 'B', 16)
+pdf.cell(0, 10, "AUM and Flows by Boutique (A$Bn)", ln=True, align = 'C')
+
+# Small spacing below image heading
+pdf.ln(5)
+
+image_y = pdf.get_y()   # Position for image
+image_height = 80       # Adjust as needed to fit the image cleanly
+
+# Insert the image - adjust witdth (w=190) to match page width
+pdf.image("ppt_boutique_flows.png", x=10, y=image_y, w=190)
+
+# Move cursor below image so next section doesn't overlap
+pdf.set_y(image_y + image_height + 10)
+
 # Insert space for chart to avoid overlap with commentary
 pdf.ln(10)  #
 # Save the PDF
