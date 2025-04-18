@@ -10,15 +10,29 @@ pdf.set_font('Arial', 'B', 16)
 # Title
 pdf.cell(200, 10, 'Group 63: Perpetual Ltd', ln=True, align='C')
 
+# Company Overview
+pdf.set_font("Arial", size=12)
+with open("C:/Users/Lucy/OneDrive/BAFE YR3/FINM3422/Perpetual Research Report/analyst_report-1/Commentary", "r", encoding="utf-8") as file:
+    text = file.read()
+
+pdf.multi_cell(0, 10, text)
+
+# Insert space for chart to avoid overlap with commentary
+pdf.ln(10)  # Adds a line break, providing space before the chart
+
 # Chart
 pdf.set_font('Arial', size=12)
-image_y = 30
-image_height = 120  # adjust if your image is taller
-pdf.image("ppt_vs_asx200.png", x=10, y=image_y, w=190)
-pdf.set_y(image_y + image_height + 10)
 
+image_y = pdf.get_y()  # Position for the image (just after the commentary)
+image_height = 120  # adjust if your image is taller
+
+pdf.image("ppt_vs_asx200.png", x=10, y=image_y, w=190)
+pdf.set_y(image_y + image_height + 10)  # Set y position after the image
+
+# Add a new page for financial summary
 pdf.add_page()
 pdf.set_font('Arial', 'B', 16)
+
 # Input values
 TICKER = "PPT.AX"
 last_price = 15.53
@@ -34,7 +48,9 @@ df = pd.DataFrame(summary.items(), columns=["Metric", "Value"])
 # Financial summary header
 pdf.set_font("Arial", style='B', size=14)
 pdf.cell(200, 10, f"Financial Summary for {TICKER}", ln=True, align='C')
- # Add a line break
+
+# Add a line break
+pdf.ln(5)
 
 # Table headers
 pdf.set_font("Arial", size=12)
